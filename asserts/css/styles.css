@@ -96,6 +96,12 @@ body {
     color: var(--whiteColor);
     text-align: center;
     padding: 150px 20px 100px;
+    min-height: calc(100vh - 140px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .hero h1 {
@@ -132,6 +138,7 @@ body {
 .featured {
     padding: 80px 0;
     background: var(--whiteColor);
+    /* min-height: calc(100vh - 200px); */
 }
 
 .featured h2 {
@@ -225,3 +232,45 @@ body {
 }
 
 /***** End Footer Section *****/
+
+
+/***** main Section *****/
+.main-content {
+    margin-top: 70px;
+    padding: 60px 0;
+    min-height: calc(100vh - 140px);
+}
+
+.page-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: var(--mainColor);
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: var(--whiteColor);
+    color: #64748b;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all .3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #3282f6;
+    color: var(--whiteColor);
+}
+
+/***** End main Section *****/

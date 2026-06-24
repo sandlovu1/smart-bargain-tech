@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Smart Bargain Tech</title>
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <!-- Navigation bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <h2 class="logo">S.B.T</h2>
+                <ul class="nav-menu">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a
+                            href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.html"
+                            class="cart-link">Cart (0)</a></li>
+                    <!-- <li><a href="checkout.html">Checkout</a></li> -->
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="container">
+                <h1 class="page-title">Our Products</h1>
+                <div class="filters">
+                    <button class="filter-btn active" data-category="all">All
+                        Products</button>
+                    <button class="filter-btn"
+                        data-category="phones">Phones</button>
+                    <button class="filter-btn"
+                        data-category="laptops">Laptops</button>
+                    <button class="filter-btn"
+                        data-category="accessories">Accessories</button>
+                    <!-- <button class="filter-btn"></button> -->
+                </div>
+
+                <div class="products-grid" id="featured-products">
+                    <!-- Products from JavaScript API items to be embeded here -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy;2026 Smart Bargain Tech. All rights reserved.</p>
+        </footer>
+        <script src="../js/script.js" defer></script>
+    </body>
 </html>
