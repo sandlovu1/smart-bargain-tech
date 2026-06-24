@@ -60,3 +60,19 @@ let cart = [];
 const cartCountElement = document.getElementById('cart-count');
 const productsGrid = document.getElementById('products-grid');
 const featuredProducts = document.getElementById('featured-products');
+
+//formart price floating
+function formatPrice(price) {
+    return '$' + price.toFixed(2);
+}
+console.log('Javascript loaded successfully');
+console.log('We have', products.length, 'products')
+
+//Function to create HTML product card (1)
+function createProductCard(product){
+    return `
+    
+    `
+}
+
+// Display function
