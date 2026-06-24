@@ -167,6 +167,11 @@ body {
     transform: translateY(-5px);
 }
 
+.product-image{
+    max-inline-size: 100%;
+    display: block;
+    overflow: hidden;
+}
 .product-info {
     padding: 20px;
 }

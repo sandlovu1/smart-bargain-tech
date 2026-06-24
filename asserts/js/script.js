@@ -69,10 +69,56 @@ console.log('Javascript loaded successfully');
 console.log('We have', products.length, 'products')
 
 //Function to create HTML product card (1)
-function createProductCard(product){
+function createProductCard(product) {
     return `
-    
+        <div class="product-card">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-description">${product.description}</p>
+                <div class="product-price">${formatPrice(product.price)}</div>
+                <div class="product-actions">
+                    <button class="btn btn-primary btn-small" onclick="addToCart(${product.price})">
+                        Add to Cart
+                    </button>
+                    <button class="btn btn-secondary btn-small" onclick="viewProduct(${product.id})">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
     `
 }
 
 // Display function
+function displayProducts(productsToShow = products) {
+    // if we are on the products page show this
+    if (productsGrid) {
+        // create HTML for eact product and join together
+        const productsHTML = productsToShow.map(createProductCard).join('');
+        productsGrid.innerHTML = productsHTML;
+    }
+
+    // if we are on homepage, show first 3 products as featured
+    if (featuredProducts) {
+        const featuredHTML = productsToShow.slice(0, 3).map(createProductCard).join('');
+        featuredProducts.innerHTML = featuredHTML;
+    }
+}
+
+// function to add product to card
+function addToCart(productId) {
+    alert('Adding product ' + productId + "to cart! (We\'ll builf this feature next)");
+}
+
+// function ro view product details
+function viewProduct(productId) {
+    const product = products.find(p => p.id === productId);
+    alert('Product: ' + product.name + '\nPrice: ' + formatPrice(product.price) + '\nDiscription: ' + product.description);
+}
+
+// wait for the page to fully FontFaceSetLoadEvent, then display products
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContent Loaded, displaying products...');
+    displayProducts();
+})
