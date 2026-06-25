@@ -83,7 +83,7 @@ function createProductCard(product) {
                         Add to Cart
                     </button>
                     <button class="btn btn-secondary btn-small" onclick="viewProduct(${product.id})">
-                        Add to Cart
+                        More Info
                     </button>
                 </div>
             </div>
@@ -109,20 +109,56 @@ function displayProducts(productsToShow = products) {
 
 // function to add product to card
 function addToCart(productId) {
-    alert('Adding product ' + productId + "to cart! (We\'ll build this feature next)");
+    const product = products.find(p => p.id === productId);
+
+    if (!product) {
+        console.error('Products not found!');
+        return;
+    }
+
+    //Check if product is already in cart
+    const exisitingItem = card.find(item => item.id === productId);
+
+    if (exisitingItem) {
+        exisitingItem.quantity += 1;
+        console.log('Increased quantity of', product.name, 'to', exisitingItem.quantity);
+
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        });
+        console.log("Added", product.name, 'to cart');
+    }
+
+    updateCartCount()
+    saveCart();
+    showNotification(product.name + 'added to cart!')
 }
 
+//Show notification when item is added
+function showNotification(message) {
+    //Create notication element
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+
+    //add to page
+    document.body.appendChild(notification);
+
+    //remove after 3 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
 // function to view product details
 function viewProduct(productId) {
     const product = products.find(p => p.id === productId);
     alert('Product: ' + product.name + '\nPrice: ' + formatPrice(product.price) + '\nDiscription: ' + product.description);
 }
-
-// wait for the page to fully FontFaceSetLoadEvent, then display products
-// document.addEventListener('DOMContentLoaded', () => {
-//     console.log('DOMContent Loaded, displaying products...');
-//     displayProducts();
-// });
 
 // function to handle filter button clicks
 function setupFilters() {
@@ -159,9 +195,39 @@ function setupFilters() {
     });
 };
 
+// Update cart count display
+function updateCartCount() {
+    //Calculate total of items in cart
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    //Update the cart count in navigation
+    if (cartCountElement) {
+        cartCountElement.textContent = totalItems;
+    }
+
+    console.log('Cart now has', totalItems, 'items');
+}
+
+
+// Save cart to browser storage so it persists between page visits
+function saveCart() {
+    localStorage.setItem('smart-bargain-cart', JSON.stringify(cart));
+}
+
+// Load cart from browser storage
+function loadCart() {
+    const savedCart = localStorage.getItem('smart-bargain-cart');
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCartCount();
+        console.log('Loaded cart with', cart.length, 'diffrent products');
+    }
+}
+
 // Update our page load function
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContent Loaded, displaying products...');
+    loadCart() // load saved cart
     displayProducts();
     setupFilters();
-});``
+});
