@@ -65,6 +65,7 @@ const featuredProducts = document.getElementById('featured-products');
 function formatPrice(price) {
     return '$' + price.toFixed(2);
 }
+
 console.log('Javascript loaded successfully');
 console.log('We have', products.length, 'products')
 
@@ -108,17 +109,59 @@ function displayProducts(productsToShow = products) {
 
 // function to add product to card
 function addToCart(productId) {
-    alert('Adding product ' + productId + "to cart! (We\'ll builf this feature next)");
+    alert('Adding product ' + productId + "to cart! (We\'ll build this feature next)");
 }
 
-// function ro view product details
+// function to view product details
 function viewProduct(productId) {
     const product = products.find(p => p.id === productId);
     alert('Product: ' + product.name + '\nPrice: ' + formatPrice(product.price) + '\nDiscription: ' + product.description);
 }
 
 // wait for the page to fully FontFaceSetLoadEvent, then display products
+// document.addEventListener('DOMContentLoaded', () => {
+//     console.log('DOMContent Loaded, displaying products...');
+//     displayProducts();
+// });
+
+// function to handle filter button clicks
+function setupFilters() {
+
+    //get all filter buttons
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    //add click event to each button
+    filterButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+            //Remove active class from the button
+            filterButtons.forEach(btn => btn.classList.remove("active"));
+
+            //add active class to clicked button
+            this.classList.add("active");
+
+            // get the category from the buttons data-catagory attribute
+            const category = this.getAttribute('data-category');
+
+            //Filter products based on the catery
+            let filteredProducts;
+
+            if (category === "all") {
+                filteredProducts = products; //Show all products
+            } else {
+                filteredProducts = products.filter(product => product.category === category)
+            }
+
+            //Display the filtered products
+            displayProducts(filteredProducts);
+            console.log('Showing', filteredProducts.length, 'products in category:', category);
+        });
+    });
+};
+
+// Update our page load function
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContent Loaded, displaying products...');
     displayProducts();
-})
+    setupFilters();
+});``
